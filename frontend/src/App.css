@@ -1,0 +1,106 @@
+:root {
+  --paper: #edf0f5;
+  --panel: #ffffff;
+  --ink: #161a3a;
+  --muted: #5d6385;
+  --line: #d5d9e6;
+  --navy: #1b2150;
+  --valid: #0e8f6b;
+  --invalid: #b8323a;
+  --focus: #3a46d6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Sora", system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.page { max-width: 960px; margin: 0 auto; padding: 48px 20px; }
+header h1 { margin: 0 0 8px; font-size: 2.25rem; letter-spacing: -0.02em; }
+header p { margin: 0 0 32px; color: var(--muted); max-width: 52ch; }
+
+.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+@media (max-width: 760px) { .layout { grid-template-columns: 1fr; } }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px;
+}
+
+label { display: block; font-weight: 600; margin-bottom: 8px; }
+
+input {
+  width: 100%;
+  padding: 14px;
+  font: 500 1.15rem "IBM Plex Mono", monospace;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+}
+input:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+button[type="submit"] {
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px;
+  font: 600 1rem "Sora", sans-serif;
+  color: #fff;
+  background: var(--navy);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+button[type="submit"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.hint { margin: 22px 0 8px; color: var(--muted); font-size: 0.9rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 7px 12px;
+  font: 400 0.85rem "Sora", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--navy); }
+.note { margin: 18px 0 0; font-size: 0.82rem; color: var(--muted); }
+
+/* The card picture: the one memorable thing on the page */
+.card {
+  position: relative;
+  aspect-ratio: 1.586;
+  padding: 22px;
+  color: #fff;
+  background: var(--navy);
+  border-radius: 16px;
+  border: 3px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+.card-valid { border-color: var(--valid); }
+.card-invalid, .card-error { border-color: var(--invalid); }
+.card-error { background: #3a3d5c; }
+
+.chip-art { width: 44px; height: 34px; background: #d9b86c; border-radius: 6px; }
+.card-brand { position: absolute; top: 22px; right: 22px; margin: 0; font-weight: 700; letter-spacing: 0.04em; }
+.card-digits {
+  position: absolute;
+  left: 22px; right: 22px; bottom: 26px;
+  margin: 0;
+  font: 500 clamp(1rem, 3.4vw, 1.4rem) "IBM Plex Mono", monospace;
+  letter-spacing: 0.06em;
+}
+
+.status { margin: 18px 0 0; font-weight: 600; }
+.status-valid { color: var(--valid); }
+.status-invalid, .status-error { color: var(--invalid); }
+.status:not([class*="status-"]) { color: var(--muted); font-weight: 400; }
+
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
