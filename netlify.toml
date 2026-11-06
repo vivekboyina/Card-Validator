@@ -1,0 +1,23 @@
+# The React (Vite) app lives in the "frontend" subfolder, so Netlify must
+# build from there. Paths below are relative to the base directory.
+[build]
+  base    = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+[functions]
+  directory = "netlify/functions"
+
+# The app has no client-side router today, but this keeps any deep link or
+# refresh on a non-file path serving the app instead of a 404.
+# API routes (/api/*) are served by Netlify Functions, which take precedence.
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+
+# Local development with `netlify dev`: proxy the Vite dev server.
+[dev]
+  framework  = "#custom"
+  command    = "npm --prefix frontend run dev"
+  targetPort = 5173
